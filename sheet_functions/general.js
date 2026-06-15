@@ -1,13 +1,13 @@
 // a suite of generally useful functions.
 
-ASCII_MIN = 65;
-ALPHABET_COUNT = 26;
-BINARY_STRING_REGEX = /^[0|1]+$/;
-TERNARY_STRING_REGEX = /^[0|1|2]+$/;
-UNKNOWN_INPUT = "?";
+var ASCII_MIN = 65;
+var ALPHABET_COUNT = 26;
+var BINARY_STRING_REGEX = /^[0|1]+$/;
+var TERNARY_STRING_REGEX = /^[0|1|2]+$/;
+var UNKNOWN_INPUT = "?";
 
-NUTRIMATIC_SEARCH = "nutrimatic";
-WORDSMITH_SEARCH = "wordsmith";
+var NUTRIMATIC_SEARCH = "nutrimatic";
+var WORDSMITH_SEARCH = "wordsmith";
 
 MORSE_TO_PLAIN = {
   ".-": "A",  "-...": "B",  "-.-.": "C",  "-..": "D",  ".": "E",  "..-.": "F",
@@ -19,8 +19,8 @@ MORSE_TO_PLAIN = {
   "----.": "9",  "-----": "0"
 };
 
-PLAIN_TO_MORSE = [];
-for (key in MORSE_TO_PLAIN) {
+var PLAIN_TO_MORSE = [];
+for (var key in MORSE_TO_PLAIN) {
   PLAIN_TO_MORSE[MORSE_TO_PLAIN[key]] = key;
 }
 
@@ -60,8 +60,8 @@ function fetchResultsFromWordsmith(queryText, maxResults) {
   var response = UrlFetchApp.fetch("http://wordsmith.org/anagram/anagram.cgi?anagram="+queryText+"&t="+maxResults);
   var lines = response.getContentText().split("\n");
   var results = [];
-  for (line in lines) {
-    var curLine = lines[line];
+  for (var i = 0; i < lines.length; i++) {
+    var curLine = lines[i];
     if (result_re.test(curLine)) {
       curLine = curLine.replace(/<br>|<\/b>/g,"");
       results.push(curLine.trim());
@@ -96,8 +96,8 @@ function fetchResultsFromNutrimatic(queryText, maxResults) {
   var response = UrlFetchApp.fetch("https://nutrimatic.org/?src=googledoc-puzzle-tools&q="+uriSafeQueryText);
   var lines = response.getContentText().split("\n");
   var results = [];
-  for (line in lines) {
-    var curLine = lines[line];
+  for (var j = 0; j < lines.length; j++) {
+    var curLine = lines[j];
     var match = result_re.exec(curLine);
     if (match != null) {
       results.push(match[1]);
@@ -218,7 +218,7 @@ function TERNARY_TO_NUMBER(ternaryString) {
  */
 function FROM_MORSE(input, dotChar, dashChar) {
   return _forEachWord(input, function(word) {
-    var normalizedString = new String(word);
+    var normalizedString = String(word);
 
     // convert word to dots and dashes
     if (!_isNullOrUndefined(dotChar)) {

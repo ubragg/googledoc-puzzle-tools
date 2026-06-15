@@ -43,9 +43,14 @@ sheet_functions/general.js | NUTRIMATIC        | NUTRIMATIC(string, [results])  
 
 1.  Tools -> Script Editor
 2.  Paste in code
-3.  Save
-4.  Use as normal
-5.  Note that you can divide your scripts into different files.
+3.  Enable the V8 runtime (required as of February 2026):
+    - Project Settings → check **Show "appsscript.json" manifest file in editor**
+    - Open `appsscript.json` and set `"runtimeVersion": "V8"` (or copy the `appsscript.json` from this repo)
+4.  Save
+5.  Use as normal
+6.  Note that you can divide your scripts into different files.
+
+If you see `The Rhino runtime is deprecated and no longer supported`, your script project is still on the old runtime. All custom functions (`ANSWERIZE`, `CAESAR_SHIFT`, etc.) will fail until you switch to V8. If you use the [Puzzle Tools add-on](https://chrome.google.com/webstore/detail/puzzle-tools/odpkaajlinkcdiipcenajekpphefofja), the add-on publisher must publish a new version with V8 enabled.
 
 # Reference Materials
 - [Guide to extending Sheets](https://developers.google.com/apps-script/guides/sheets)
